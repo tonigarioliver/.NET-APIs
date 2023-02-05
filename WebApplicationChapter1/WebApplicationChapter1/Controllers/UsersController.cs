@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationChapter1.DataAccess;
 using WebApplicationChapter1.Models.DataModels;
+using WebApplicationChapter1.Services;
 
 namespace WebApplicationChapter1.Controllers
 {
@@ -14,17 +15,27 @@ namespace WebApplicationChapter1.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UnivesityDBContext _context;
+        private readonly UniversityDBContext _context;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(UnivesityDBContext context)
+        public UsersController(UniversityDBContext context,ILogger<UsersController>logger)
         {
             _context = context;
+            _logger = logger;
         }
+        
+
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
+            _logger.LogTrace($"{nameof(UsersController)} - {nameof(GetUser)} - Trace Level Log");
+            _logger.LogDebug($"{nameof(UsersController)} - {nameof(GetUser)} - Debug Level Log");
+            _logger.LogInformation($"{nameof(UsersController)} - {nameof(GetUser)} - Information Level Log");
+            _logger.LogWarning($"{nameof(UsersController)} - {nameof(GetUser)} - Warning Level Log");
+            _logger.LogError($"{nameof(UsersController)} - {nameof(GetUser)} - Error Level Log");
+            _logger.LogCritical($"{nameof(UsersController)} - {nameof(GetUser)} - Critical Level Log");
             return await _context.User.ToListAsync();
         }
 
@@ -41,6 +52,7 @@ namespace WebApplicationChapter1.Controllers
 
             return user;
         }
+
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

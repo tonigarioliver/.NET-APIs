@@ -11,7 +11,7 @@ using WebApplicationChapter1.DataAccess;
 
 namespace WebApplicationChapter1.Migrations
 {
-    [DbContext(typeof(UnivesityDBContext))]
+    [DbContext(typeof(UniversityDBContext))]
     [Migration("20230119193446_Create Users and Course table")]
     partial class CreateUsersandCoursetable
     {
